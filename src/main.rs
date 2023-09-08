@@ -6,21 +6,16 @@ use colored::*;
 const MAX_NUMBER: u32 = 100;
 
 struct GameState {
-    correct_number: u32,
-    max_attempts: u32,
-    attempts: u32,
+  correct_number: u32,
+  max_attempts: u32,
+  attempts: u32,
 }
 
 fn main() {
-  println!("Guess the number (1-{})!", MAX_NUMBER);
+  println!("Welcome to Guess the Number!");
+  println!("You have to guess a number between 1 and {}.", MAX_NUMBER);
 
-  let mut game_state = GameState {
-    correct_number: rand::thread_rng().gen_range(1, MAX_NUMBER + 1),
-    max_attempts: 5,
-    attempts: 0,
-  };
-
-  //println!("The correct number is: {}", game_state.correct_number);
+  let mut game_state = initialize_game();
 
   loop {
     println!(
@@ -73,6 +68,17 @@ fn main() {
     main();
   } else {
     println!("Thanks for playing!");
+  }
+}
+
+fn initialize_game() -> GameState {
+  let correct_number = rand::thread_rng().gen_range(1, MAX_NUMBER + 1);
+  println!("The correct number is: {}", correct_number);
+
+  GameState {
+    correct_number,
+    max_attempts: 5,
+    attempts: 0,
   }
 }
 
